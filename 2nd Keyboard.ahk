@@ -1,6 +1,7 @@
 #Requires AutoHotkey v2.0
-#SingleInstance Force
 
+SetWorkingDir(A_ScriptDir)  ; Ensures a consistent starting directory.
+#SingleInstance Force
 Persistent ; (Interception hotkeys do not stop AHK from exiting, so use this)
 #include lib\AutoHotInterception.ahk
 #include lib\InterceptionTapHold.ahk
@@ -15,7 +16,7 @@ SetDefaultMouseSpeed 0
 
 ;_-_-_VariablesLists_-_-_-
 
-ICO := "C:\Users\User\Documents\AHK - Scripting\Secondary Keyboard Into A Macroboard\AHK Codes\lib\ico\Keyboard.ico"
+ICO := A_ScriptDir "\lib\ico\Keyboard.ico"
 MyDownloads := "C:\Users\User\Downloads"
 TimeStamp := "YYYYMMDDHH24MISS"
 
