@@ -122,7 +122,7 @@ Func_a(isHold, taps, state) { ; AutoHotkey
 
 	if (isHold = 0) & (taps = 1) & (state)
 	{
-		#Include lib\ahk\Ahk_Help_Selection.ahk
+		#Include lib\Ahk_Help_Selection.ahk
 	}
 
 	if (isHold = 0) & (taps = 3) & (state) ; ui-dash
@@ -437,7 +437,7 @@ Func_v(isHold, taps, state) { ; VLC Media Player
 Func_w(isHold, taps, state) { ; Wifi
 	if (isHold = 0) & (taps = 1) & (state)
 	{
-		#Include "lib/ahk/Wifi_Connection.ahk"
+		#Include "lib\Wifi_Connection.ahk"
 	}
 }
 
@@ -560,7 +560,7 @@ Func_sp(isHold, taps, state) { ; Delete
 		ToolTip("Select a File/Folder")
 		KeyWait("LButton", "D")
 		ToolTip()
-		#Include lib/ahk/Shift_Del.ahk
+		#Include lib\Shift_Del.ahk
 	}
 
 	if (isHold = 0) & (taps = 2) & (state)
