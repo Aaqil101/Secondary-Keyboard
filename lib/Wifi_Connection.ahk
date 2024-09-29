@@ -13,13 +13,12 @@ S_Wifi := "Select a Wifi Connection"
 W_width := "w400"
 W_hight := "h145"
 
-; Get the directory path of the script without the last part (\ahk)
+; Get the directory path of the script without the last part (\lib)
 ; A_ScriptDirWolp := RegExReplace(A_ScriptDir, "\\[^\\]+$")
-
 
 ; Wifi button image path
 ; This image is used to toggle the Wifi on and off
-Wifi := A_ScriptDir "\pic\WifiOn&off.png"
+Wifi := "c:\Users\User\Documents\GitHub\Secondary-Keyboard\lib\pic\WifiOn&off.png"
 
 ;=================================
 
@@ -55,21 +54,21 @@ Wifi := A_ScriptDir "\pic\WifiOn&off.png"
 
 Wifi_Connection_v1(*)
 {
-	Run(A_ScriptDir "\exe\Wifi_Connecting.exe")
+	Run("c:\Users\User\Documents\GitHub\Secondary-Keyboard\lib\exe\Wifi_Connecting.exe")
 	wcGui.Destroy()
 	return
 }
 
 Wifi_Connection_v2(*)
 {
-	Run(A_ScriptDir "\exe\Wifi_Connexion.exe")
+	Run("c:\Users\User\Documents\GitHub\Secondary-Keyboard\lib\exe\Wifi_Connexion.exe")
 	wcGui.Destroy()
 	return
 }
 
 Wifi_Dis(*)
 {
-	Run(A_ScriptDir "\exe\Wifi_Disconnect.exe")
+	Run("c:\Users\User\Documents\GitHub\Secondary-Keyboard\lib\exe\Wifi_Disconnect.exe")
 	wcGui.Destroy()
 	return
 }
@@ -86,7 +85,7 @@ Other_Wifi_Connection(*)
 	Click() */
 
 	; New way
-	Run(A_ScriptDir "\exe\ms-availablenetworks.url")
+	Run("c:\Users\User\Documents\GitHub\Secondary-Keyboard\lib\exe\ms-availablenetworks.url")
 	wcGui.Destroy()
 	return
 }
