@@ -14,12 +14,12 @@ W_width := "w400"
 W_hight := "h145"
 
 ; Get the directory path of the script without the last part (\ahk)
-A_ScriptDirWolp := RegExReplace(A_ScriptDir, "\\[^\\]+$")
+; A_ScriptDirWolp := RegExReplace(A_ScriptDir, "\\[^\\]+$")
 
-; Add the path to the image file to the directory path
-; The resulting path is the full path to the image file
-Wifi := "c:\Users\User\Documents\GitHub\Secondary-Keyboard\lib\pic\WifiOn&off.png" ;A_ScriptDirWolp "\pic\WifiOn&off.png"
 
+; Wifi button image path
+; This image is used to toggle the Wifi on and off
+Wifi := A_ScriptDir "\pic\WifiOn&off.png"
 
 ;=================================
 
