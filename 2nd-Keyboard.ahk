@@ -3,6 +3,11 @@
 SetWorkingDir(A_ScriptDir)  ; Ensures a consistent starting directory.
 #SingleInstance Force
 Persistent ; (Interception hotkeys do not stop AHK from exiting, so use this)
+
+; These lines include the necessary libraries for the script to work.
+; AutoHotInterception(https://github.com/evilC/AutoHotInterception) is a library that allows us to intercept and
+; modify keyboard and mouse input. InterceptionTapHold(https://github.com/evilC/TapHoldManager) is a library
+; that allows us to tap and hold keys.
 #include lib\AutoHotInterception.ahk
 #include lib\InterceptionTapHold.ahk
 #include lib\TapHoldManager.ahk
@@ -30,13 +35,21 @@ B_v2_93_18 := "E:\Blender\Blender Foundation\stable\blender-2.93.18+lts.e452844a
 
 ;_-_-_-_-_-_-_-_-_-_-_-_-
 
+; Set the icon for the tray menu
 A_IconTip := "Secondary Keyboard"
+; Load the icon from the ICO file
 TraySetIcon(ICO)
 
+; Create an instance of the AutoHotInterception class, which allows us to
+; intercept and block keyboard and mouse input.
 AHI := AutoHotInterception()
+
+; Get the device id of the keyboard with the specified handle
 keyboard1Id := AHI.GetDeviceIdFromHandle(false, "HID\VID_C0F4&PID_05F5&REV_0110&MI_00")
 ; keyboard1Id := AHI.GetKeyboardId(0x03EB, 0xFF02)
 ; keyboard1Id := 3
+
+; Create an instance of InterceptionTapHold class which will manage the keyboard with the given id
 ITH1 := InterceptionTapHold(AHI, keyboard1Id)
 
 ITH1.Add("A", Func_a)
