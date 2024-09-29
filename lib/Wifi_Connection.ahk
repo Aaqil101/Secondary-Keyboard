@@ -18,7 +18,7 @@ A_ScriptDirWolp := RegExReplace(A_ScriptDir, "\\[^\\]+$")
 
 ; Add the path to the image file to the directory path
 ; The resulting path is the full path to the image file
-Wifi := A_ScriptDirWolp "\pic\WifiOn&off.png"
+Wifi := "c:\Users\User\Documents\GitHub\Secondary-Keyboard\lib\pic\WifiOn&off.png" ;A_ScriptDirWolp "\pic\WifiOn&off.png"
 
 
 ;=================================
