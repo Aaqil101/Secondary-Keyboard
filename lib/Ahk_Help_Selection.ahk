@@ -11,15 +11,15 @@ SetDefaultMouseSpeed 0
 ;========VariablesLists===========
 
 ; Get the directory path of the script without the last part (\ahk)
-A_ScriptDirWolp := RegExReplace(A_ScriptDir, "\\[^\\]+$")
+; A_ScriptDirWolp := RegExReplace(A_ScriptDir, "\\[^\\]+$")
 
-A_Help := A_ScriptDirWolp "\ico\Help.ico"
+A_Help := "c:\Users\User\Documents\GitHub\Secondary-Keyboard\lib\ico\Help.ico"
 Sel := "Ahk Help Selection"
 H_Select := "Select a Help File`nVersion"
 H_width := "w400"
 H_hight := "h110"
-AHS_Left := A_ScriptDirWolp "\pic\HelpSelection_Left.png"
-AHS_Right := A_ScriptDirWolp "\pic\HelpSelection_Right.png"
+AHS_Left := "c:\Users\User\Documents\GitHub\Secondary-Keyboard\lib\pic\HelpSelection_Left.png"
+AHS_Right := "c:\Users\User\Documents\GitHub\Secondary-Keyboard\lib\pic\HelpSelection_Right.png"
 
 ;=================================
 

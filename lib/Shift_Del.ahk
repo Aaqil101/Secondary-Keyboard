@@ -14,9 +14,9 @@ D_width := "w400"
 D_hight := "h110"
 
 ; Get the directory path of the script without the last part (\ahk)
-A_ScriptDirWolp := RegExReplace(A_ScriptDir, "\\[^\\]+$")
+; A_ScriptDirWolp := RegExReplace(A_ScriptDir, "\\[^\\]+$")
 
-Delete := A_ScriptDirWolp "\pic\Warning.png"
+Delete := "c:\Users\User\Documents\GitHub\Secondary-Keyboard\lib\pic\Warning.png"
 
 ;=================================
 
