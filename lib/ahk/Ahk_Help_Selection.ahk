@@ -1,5 +1,6 @@
 ﻿#Requires AutoHotkey v2.0
 
+SetWorkingDir(A_ScriptDir)  ; Ensures a consistent starting directory.
 #SingleInstance force
 Persistent ; (Interception hotkeys do not stop AHK from exiting, so use this)
 
@@ -7,13 +8,16 @@ SetDefaultMouseSpeed 0
 
 ;========VariablesLists===========
 
-A_Help := "C:\Users\User\Documents\AHK - Scripting\Secondary Keyboard Into A Macroboard\AHK Codes\lib\ico\Help.ico"
+; Get the directory path of the script without the last part (\ahk)
+A_ScriptDirWolp := RegExReplace(A_ScriptDir, "\\[^\\]+$")
+
+A_Help := A_ScriptDirWolp "\ico\Help.ico"
 Sel := "Ahk Help Selection"
 H_Select := "Select a Help File`nVersion"
 H_width := "w400"
 H_hight := "h110"
-AHS_Left := "C:\Users\User\Documents\AHK - Scripting\Secondary Keyboard Into A Macroboard\AHK Codes\lib\pic\HelpSelection_Left.png"
-AHS_Right := "C:\Users\User\Documents\AHK - Scripting\Secondary Keyboard Into A Macroboard\AHK Codes\lib\pic\HelpSelection_Right.png"
+AHS_Left := A_ScriptDirWolp "\pic\HelpSelection_Left.png"
+AHS_Right := A_ScriptDirWolp "\pic\HelpSelection_Right.png"
 
 ;=================================
 
@@ -48,12 +52,9 @@ AHS_Right := "C:\Users\User\Documents\AHK - Scripting\Secondary Keyboard Into A 
 
 Ahk_V1_Help_File(*)
 {
-	if !WinExist("ahk_exe hh.exe")
-	{
+	if !WinExist("ahk_exe hh.exe") {
 		Run(A_ProgramFiles "\AutoHotkey\v1.1.37.02\AutoHotkeyU64.exe")
-	}
-	else
-	{
+	} else {
 		WinActivate("ahk_exe hh.exe")
 	}
 	ahGui.Destroy()
@@ -62,12 +63,10 @@ Ahk_V1_Help_File(*)
 
 Ahk_V2_Help_File(*)
 {
-	if !WinExist("AutoHotkey v2 - Google Chrome")
-	{
+	if !WinExist("AutoHotkey v2 - Google Chrome") {
 		Run("https://www.autohotkey.com/docs/v2/index.htm")
 	}
-	else
-	{
+	else {
 		WinActivate("AutoHotkey v2 - Google Chrome")
 	}
 	ahGui.Destroy()
