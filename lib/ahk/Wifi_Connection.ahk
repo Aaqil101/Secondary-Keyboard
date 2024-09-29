@@ -1,5 +1,6 @@
 ﻿#Requires AutoHotkey v2.0
 
+SetWorkingDir(A_ScriptDir)  ; Ensures a consistent starting directory.
 #SingleInstance force
 Persistent
 
@@ -11,7 +12,14 @@ Wis := "Wifi Selection"
 S_Wifi := "Select a Wifi Connection"
 W_width := "w400"
 W_hight := "h145"
-Wifi := "C:\Users\User\Documents\AHK - Scripting\Secondary Keyboard Into A Macroboard\AHK Codes\lib\pic\WifiOn&off.png"
+
+; Get the directory path of the script without the last part (\ahk)
+A_ScriptDirWolp := RegExReplace(A_ScriptDir, "\\[^\\]+$")
+
+; Add the path to the image file to the directory path
+; The resulting path is the full path to the image file
+Wifi := A_ScriptDirWolp "\pic\WifiOn&off.png"
+
 
 ;=================================
 
@@ -31,6 +39,7 @@ Wifi := "C:\Users\User\Documents\AHK - Scripting\Secondary Keyboard Into A Macro
 	wcGui.Add("Button", "x262 y65 w120 h30 +Center", "Connexion").OnEvent("Click", Wifi_Connection_v2.Bind("Normal"))
 	wcGui.Add("Button", "x145 y65 w110 h30 +Center", "Discinnect").OnEvent("Click", Wifi_Dis.Bind("Normal"))
 	wcGui.Add("Button", "x138 y105 w120 h30 +Center", "Other").OnEvent("Click", Other_Wifi_Connection.Bind("Normal"))
+	wcGui.OnEvent('Close', (*) => ExitApp())
 	wcGui.BackColor := "123452"
 	wcGui.Title := Wis
 	wcGui.Show(W_width . " " . W_hight)
@@ -46,27 +55,28 @@ Wifi := "C:\Users\User\Documents\AHK - Scripting\Secondary Keyboard Into A Macro
 
 Wifi_Connection_v1(*)
 {
-	Run "C:\Users\User\Documents\AHK - Scripting\Secondary Keyboard Into A Macroboard\AHK Codes\lib\exe\Wifi_Connecting.exe"
+	Run(A_ScriptDirWolp "\exe\Wifi_Connecting.exe")
 	wcGui.Destroy()
 	return
 }
 
 Wifi_Connection_v2(*)
 {
-	Run "C:\Users\User\Documents\AHK - Scripting\Secondary Keyboard Into A Macroboard\AHK Codes\lib\exe\Wifi_Connexion.exe"
+	Run(A_ScriptDirWolp "\exe\Wifi_Connexion.exe")
 	wcGui.Destroy()
 	return
 }
 
 Wifi_Dis(*)
 {
-	Run "C:\Users\User\Documents\AHK - Scripting\Secondary Keyboard Into A Macroboard\AHK Codes\lib\exe\Wifi_Disconnect.exe"
+	Run(A_ScriptDirWolp "\exe\Wifi_Disconnect.exe")
 	wcGui.Destroy()
 	return
 }
 
 Other_Wifi_Connection(*)
 {
+	; Old way
 	/* Send("#b")
 	Sleep(100)
 	Send("{Left} 4")
@@ -74,7 +84,9 @@ Other_Wifi_Connection(*)
 	MouseMove(177, 233)
 	Sleep(250)
 	Click() */
-	Run("C:\Users\User\Documents\AHK - Scripting\Secondary Keyboard Into A Macroboard\AHK Codes\lib\exe\ms-availablenetworks.url")
+
+	; New way
+	Run(A_ScriptDirWolp "\exe\ms-availablenetworks.url")
 	wcGui.Destroy()
 	return
 }
