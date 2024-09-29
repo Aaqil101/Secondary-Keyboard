@@ -91,7 +91,7 @@ return
 ;========FunctionLists===========
 ;================================
 
-Func_a(isHold, taps, state) { ; AutoHotkey & AHK_Studio
+Func_a(isHold, taps, state) { ; AutoHotkey
 	if (isHold = 1) & (taps = 1) & (state) ; Ahk2Exe
 	{
 		if (!WinExist("ahk_exe Ahk2Exe.exe")) {
