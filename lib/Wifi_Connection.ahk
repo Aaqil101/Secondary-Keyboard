@@ -55,21 +55,21 @@ Wifi := A_ScriptDir "\pic\WifiOn&off.png"
 
 Wifi_Connection_v1(*)
 {
-	Run(A_ScriptDirWolp "\exe\Wifi_Connecting.exe")
+	Run(A_ScriptDir "\exe\Wifi_Connecting.exe")
 	wcGui.Destroy()
 	return
 }
 
 Wifi_Connection_v2(*)
 {
-	Run(A_ScriptDirWolp "\exe\Wifi_Connexion.exe")
+	Run(A_ScriptDir "\exe\Wifi_Connexion.exe")
 	wcGui.Destroy()
 	return
 }
 
 Wifi_Dis(*)
 {
-	Run(A_ScriptDirWolp "\exe\Wifi_Disconnect.exe")
+	Run(A_ScriptDir "\exe\Wifi_Disconnect.exe")
 	wcGui.Destroy()
 	return
 }
@@ -86,7 +86,7 @@ Other_Wifi_Connection(*)
 	Click() */
 
 	; New way
-	Run(A_ScriptDirWolp "\exe\ms-availablenetworks.url")
+	Run(A_ScriptDir "\exe\ms-availablenetworks.url")
 	wcGui.Destroy()
 	return
 }
