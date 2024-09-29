@@ -1,5 +1,6 @@
 #Requires AutoHotkey v2.0
 
+SetWorkingDir(A_ScriptDir)  ; Ensures a consistent starting directory.
 #SingleInstance force
 Persistent ; (Interception hotkeys do not stop AHK from exiting, so use this)
 
@@ -11,7 +12,11 @@ Del := "Shift Delete"
 D_Sure := "Are you sure...?"
 D_width := "w400"
 D_hight := "h110"
-Delete := "C:\Users\User\Documents\AHK - Scripting\Secondary Keyboard Into A Macroboard\AHK Codes\lib\pic\Warning.png"
+
+; Get the directory path of the script without the last part (\ahk)
+A_ScriptDirWolp := RegExReplace(A_ScriptDir, "\\[^\\]+$")
+
+Delete := A_ScriptDirWolp "\pic\Warning.png"
 
 ;=================================
 
