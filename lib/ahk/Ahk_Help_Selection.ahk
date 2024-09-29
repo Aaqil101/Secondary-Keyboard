@@ -4,6 +4,8 @@ SetWorkingDir(A_ScriptDir)  ; Ensures a consistent starting directory.
 #SingleInstance force
 Persistent ; (Interception hotkeys do not stop AHK from exiting, so use this)
 
+; Set the default mouse speed to 0, which is the fastest speed.
+; This is useful for scripts that need to move the mouse quickly.
 SetDefaultMouseSpeed 0
 
 ;========VariablesLists===========
@@ -52,24 +54,38 @@ AHS_Right := A_ScriptDirWolp "\pic\HelpSelection_Right.png"
 
 Ahk_V1_Help_File(*)
 {
+	; Check if the Help file is already open
 	if !WinExist("ahk_exe hh.exe") {
+		; If not, open it with the appropriate version of AutoHotkey
 		Run(A_ProgramFiles "\AutoHotkey\v1.1.37.02\AutoHotkeyU64.exe")
 	} else {
+		; If it is, just activate the window
 		WinActivate("ahk_exe hh.exe")
 	}
+	
+	; Destroy the GUI, as it is no longer needed
 	ahGui.Destroy()
+
+	; Return from the function
 	return
 }
 
 Ahk_V2_Help_File(*)
 {
+	; Open the AutoHotkey v2 documentation in Google Chrome
 	if !WinExist("AutoHotkey v2 - Google Chrome") {
+		; Open the documentation if it's not already open
 		Run("https://www.autohotkey.com/docs/v2/index.htm")
-	}
-	else {
+	} else {
+		; Activate the Chrome window if it's already open
 		WinActivate("AutoHotkey v2 - Google Chrome")
 	}
+	
+	; Destroy the GUI
 	ahGui.Destroy()
+
+	; Return from the function
 	return
 }
+; Return from all function
 return
