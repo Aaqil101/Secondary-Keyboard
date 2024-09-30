@@ -122,7 +122,7 @@ WIFI(ww_icon, on_off_png, ww_transparent, window_width, window_height, wifi_conn
     WM_MOUSEMOVE(wParam, lParam, msg, hwnd) {
     MouseGetPos(, , , &ctrl)
 
-    ; Set the cursor to 'BCursor' when hovering over Button1, Button2 Button3 and Button4
+    ; Set the cursor to 'BCursor' when hovering over Button1, Button2, Button3 and Button4
     if (ctrl == "Button1")
         DllCall("SetCursor", "UInt", BCursor)
     if (ctrl == "Button2")
