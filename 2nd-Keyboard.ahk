@@ -12,6 +12,9 @@ Persistent ; (Interception hotkeys do not stop AHK from exiting, so use this)
 #include lib\InterceptionTapHold.ahk
 #include lib\TapHoldManager.ahk
 
+; Custon function libraries
+#Include lib\wifi_connection_func.ahk
+
 ; Alt key is !
 ; Windows key is #
 ; Shift key is +
@@ -21,7 +24,7 @@ SetDefaultMouseSpeed 0
 
 ;_-_-_VariablesLists_-_-_-
 
-ICO := A_ScriptDir "\lib\ico\Keyboard.ico"
+masterIcon := A_ScriptDir "\lib\ico\Keyboard.ico"
 MyDownloads := "C:\Users\User\Downloads"
 TimeStamp := "YYYYMMDDHH24MISS"
 
@@ -38,7 +41,7 @@ B_v2_93_18 := "E:\Blender\Blender Foundation\stable\blender-2.93.18+lts.e452844a
 ; Set the icon for the tray menu
 A_IconTip := "Secondary Keyboard"
 ; Load the icon from the ICO file
-TraySetIcon(ICO)
+TraySetIcon(masterIcon)
 
 ; Create an instance of the AutoHotInterception class, which allows us to
 ; intercept and block keyboard and mouse input.
@@ -437,7 +440,28 @@ Func_v(isHold, taps, state) { ; VLC Media Player
 Func_w(isHold, taps, state) { ; Wifi
 	if (isHold = 0) & (taps = 1) & (state)
 	{
-		#Include "lib\Wifi_Connection.ahk"
+		; Variables
+		wifi_icon := A_ScriptDir "\lib\ico\Wifi.ico"
+		image := A_ScriptDir "\lib\pic\WifiOn&off.png"
+		wcting := A_ScriptDir "\lib\exe\Wifi_Connecting.exe"
+		wction := A_ScriptDir "\lib\exe\Wifi_Connexion.exe"
+		wd := A_ScriptDir "\lib\exe\Wifi_Disconnect.exe"
+		ms := A_ScriptDir "\lib\exe\ms-availablenetworks.url"
+
+		; Functions
+		WIFI(
+			wifi_icon,
+			image,
+			240,	; Transparent
+			400,	; Width
+			145,	; Y-axis
+			wcting,
+			wction,
+			wd,
+			ms
+		)
+		TraySetIcon(masterIcon) ; Set the icon back to the original
+		return WIFI
 	}
 }
 
