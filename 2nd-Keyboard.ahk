@@ -451,6 +451,7 @@ Func_w(isHold, taps, state) { ; Wifi
 		; Functions
 		WIFI(
 			wifi_icon,
+			"Select a Wifi to Connect",
 			image,
 			240,	; Transparent
 			400,	; Width
@@ -702,6 +703,6 @@ Func_2(isHold, taps, state) { ; Blender_Shortcuts
 Func_CapsLock(isHold, taps, state) { ; Date Convertor
 	if (isHold = 0) & (taps = 1) & (state)
 	{
-		Run(A_ScriptDir "\lib\py\Date_Convertor.py")
+	Run("cmd.exe /c python c:\Users\User\Documents\GitHub\Secondary-Keyboard\lib\py\Date_Convertor.py")
 	}
 }
