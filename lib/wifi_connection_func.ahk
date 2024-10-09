@@ -92,7 +92,7 @@ WIFI(
     
     ; Set the font, font size and font color for the GUI window
     wcGui.SetFont("Bold", "JetBrains Mono NL")
-    wcGui.SetFont("s14")		 ; Preferred size.
+    wcGui.SetFont("s13")		 ; Preferred size.
     wcGui.SetFont(header_col)	 ; Preferred color.
     
     ; Add a text control to the window with the specified text and
