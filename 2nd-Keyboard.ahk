@@ -14,6 +14,7 @@ Persistent ; (Interception hotkeys do not stop AHK from exiting, so use this)
 
 ; Custon function libraries
 #Include lib\wifi_connection_func.ahk
+#Include lib\ahk_help_selection_func.ahk
 
 ; Alt key is !
 ; Windows key is #
@@ -125,7 +126,12 @@ Func_a(isHold, taps, state) { ; AutoHotkey
 
 	if (isHold = 0) & (taps = 1) & (state)
 	{
-		#Include lib\Ahk_Help_Selection.ahk
+		AHK_HELP(
+			A_ScriptDir "\lib\ico\Help.ico",
+			"Select a Help File`nVersion",
+			A_ScriptDir "\lib\pic\HelpSelection_Left.png",
+			A_ScriptDir "\lib\pic\HelpSelection_Right.png"
+		)
 	}
 
 	if (isHold = 0) & (taps = 3) & (state) ; ui-dash
@@ -440,26 +446,14 @@ Func_v(isHold, taps, state) { ; VLC Media Player
 Func_w(isHold, taps, state) { ; Wifi
 	if (isHold = 0) & (taps = 1) & (state)
 	{
-		; Variables
-		wifi_icon := A_ScriptDir "\lib\ico\Wifi.ico"
-		image := A_ScriptDir "\lib\pic\WifiOn&off.png"
-		wcting := A_ScriptDir "\lib\exe\Wifi_Connecting.exe"
-		wction := A_ScriptDir "\lib\exe\Wifi_Connexion.exe"
-		wd := A_ScriptDir "\lib\exe\Wifi_Disconnect.exe"
-		ms := A_ScriptDir "\lib\exe\ms-availablenetworks.url"
-
-		; Functions
 		WIFI(
-			wifi_icon,
+			A_ScriptDir "\lib\ico\Wifi.ico",
 			"Select a Wifi to Connect",
-			image,
-			240,	; Transparent
-			400,	; Width
-			145,	; Y-axis
-			wcting,
-			wction,
-			wd,
-			ms
+			A_ScriptDir "\lib\pic\WifiOn&off.png",
+			A_ScriptDir "\lib\exe\Wifi_Connecting.exe",
+			A_ScriptDir "\lib\exe\Wifi_Connexion.exe",
+			A_ScriptDir "\lib\exe\Wifi_Disconnect.exe",
+			A_ScriptDir "\lib\exe\ms-availablenetworks.url",
 		)
 		TraySetIcon(masterIcon) ; Set the icon back to the original
 		return WIFI
