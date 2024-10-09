@@ -9,11 +9,71 @@ SetDefaultMouseSpeed 0
 /*
 * Include the GuiEnhancerKit library, which provides a set of functions to enhance the look and feel of AutoHotkey GUIs.
 * For more information, see https://github.com/nperovic/GuiEnhancerKit
-*/
-#Include GuiEnhancerKit.ahk
 
-; Define the function WIFI
-WIFI(ww_icon, ww_header, on_off_png, ww_transparent, window_width, window_height, wifi_connecting, wifi_connexion, wifi_disconnect, ms_availablenetworks) {
+* Include the ColorButton library, which allows you to create custom buttons.
+* For more information, see https://github.com/nperovic/ColorButton.ahk
+*/
+
+#Include GuiEnhancerKit.ahk
+#Include ColorButton.ahk
+
+/**
+ * Creates a GUI window with a specified icon, header text, left and right images, colors and ect...
+ * * The color palette can be found in here - https://in.pinterest.com/pin/1196337403011413/ & https://in.pinterest.com/pin/985231163680747/
+ * @param {String} ww_icon - Icon for the GUI window
+ * @param {String} on_off_png - Images for the left and right
+ * @param {String} wifi_connecting - Add the pathway for wifi_connecting.exe
+ * @param {String} wifi_connexion - Add the pathway for wifi_connexion.exe
+ * @param {String} wifi_disconnect - Add the pathway for wifi_disconnect.exe
+ * @param {String} ms_availablenetworks - Add the pathway for ms_availablenetworks.url
+ * @param {String} [header_col="cfff5cc"] - Color of the header text
+ * @param {String} [background_col="5d576b"] - Background color of the GUI window
+ * @param {String} [b1_bgcol="9bc1bc"] - Background color of the first button
+ * @param {Float} [b1_showBorder=0] - Show border of the first button
+ * * The color of button is a string but by default it's 0 because (0 := Disable)
+ * @param {String} [b1_borderCol=0] - Border color of the first button
+ * @param {Float} [b1_roundedCorner=9] - Rounded corner of the first button
+ * @param {String} [b2_bgcol="ed6a5a"] - Background color of the second button
+ * @param {Float} [b2_showBorder=0] - Show border of the second button
+ * * The color of button is a string but by default it's 0 because (0 := Disable)
+ * @param {String} [b2_borderCol=0] - Border color of the second button
+ * @param {Float} [b2_roundedCorner=9] - Rounded corner of the second button
+ * @param {String} [b_text_col="fff5cc"] - Colors of the buttons text
+ * @param {Float} [ww_transparent=250] - Level of transparency for the GUI window (0-255)
+ * @param {Float} [window_width=400] - Width of the GUI window
+ * @param {Float} [window_height=150] - Height of the GUI window
+ */
+WIFI(
+    ww_icon,
+    ww_header,
+    on_off_png,
+    wifi_connecting,
+    wifi_connexion,
+    wifi_disconnect,
+    ms_availablenetworks,
+    header_col := "cFBFADA",
+    background_col := "221830",
+    b1_bgcol := "c5757c",
+    b1_showBorder := 0,
+    b1_borderCol := 0,
+    b1_roundedCorner := 9,
+    b2_bgcol := "c5757c",
+    b2_showBorder := 0,
+    b2_borderCol := 0,
+    b2_roundedCorner := 9,
+    b3_bgcol := "c5757c",
+    b3_showBorder := 0,
+    b3_borderCol := 0,
+    b3_roundedCorner := 9,
+    b4_bgcol := "462037",
+    b4_showBorder := 0,
+    b4_borderCol := 0,
+    b4_roundedCorner := 9,
+    b_text_col := "FBFADA",
+    ww_transparent := 250,
+    window_width := 400,
+    window_height := 145
+) {
     ; Set the icon of the tray to the specified icon file
     ; ww_icon is a variable that contains the path to the icon file
     ; This is used to set the icon of the tray to a custom icon
@@ -33,7 +93,7 @@ WIFI(ww_icon, ww_header, on_off_png, ww_transparent, window_width, window_height
     ; Set the font, font size and font color for the GUI window
     wcGui.SetFont("Bold", "JetBrains Mono NL")
     wcGui.SetFont("s14")		 ; Preferred size.
-    wcGui.SetFont("cFFFFFF")	 ; Preferred color.
+    wcGui.SetFont(header_col)	 ; Preferred color.
     
     ; Add a text control to the window with the specified text and
     ; options. The text is centered and placed at position (65, 15).
@@ -49,22 +109,44 @@ WIFI(ww_icon, ww_header, on_off_png, ww_transparent, window_width, window_height
     wcGui.SetFont("s10")
 
     ; Set the background color of the GUI window
-    wcGui.BackColor := "0x313131"
+    wcGui.BackColor := background_col
 
-    ; Add buttons to the GUI window
-    wcGui.AddButton("x17 y65 w120 h30 Center", "Connecting...").OnEvent("Click", Wifi_Connection_v1.Bind("Normal"))
-    wcGui.AddButton("x262 y65 w120 h30 Center", "Connexion").OnEvent("Click", Wifi_Connection_v2.Bind("Normal"))
-    wcGui.AddButton("x145 y65 w110 h30 Center", "Discinnect").OnEvent("Click", Wifi_Dis.Bind("Normal"))
+    ; Add a button to the GUI window with the text "Connecting..."
+    ; The button is centered and placed at position (17, 65)
+    ; The button is 120 pixels wide and 30 pixels high
+    ; When the button is clicked, the Wifi_Connection_v1 function is called with the argument "Normal".
+    button1 := wcGui.AddButton("x17 y65 w120 h30 Center", "Connecting...")
+    button1.SetColor(b1_bgcol, b_text_col, b1_showBorder, b1_borderCol, b1_roundedCorner)
+    button1.OnEvent("Click", Wifi_Connection_v1.Bind("Normal"))
+
+    ; Add a button to the GUI window with the text "Connexion"
+    ; The button is centered and placed at position (262, 65)
+    ; The button is 120 pixels wide and 30 pixels high
+    ; When the button is clicked, the Wifi_Connection_v2 function is called
+    ; with the argument "Normal"
+    button2 := wcGui.AddButton("x262 y65 w120 h30 Center", "Connexion")
+    button2.SetColor(b2_bgcol, b_text_col, b2_showBorder, b2_borderCol, b2_roundedCorner)
+    button2.OnEvent("Click", Wifi_Connection_v2.Bind("Normal"))
+
+    ; Add a button to disconnect the Wifi.
+    ; The button is centered and placed at position (145, 65).
+    ; The button is 110 pixels wide and 30 pixels high.
+    ; When the button is clicked, the Wifi_Dis function is called with the argument "Normal".
+    button3 := wcGui.AddButton("x145 y65 w110 h30 Center", "Discinnect")
+    button3.SetColor(b3_bgcol, b_text_col, b3_showBorder, b3_borderCol, b3_roundedCorner)
+    button3.OnEvent("Click", Wifi_Dis.Bind("Normal"))
 
     ; Set the font size of the Wifi Center button to 15.
     wcGui.SetFont("s15")
 
-    ; Add a button to the GUI window with the text "Wifi Center"
+    ; Add a button to open Wifi Center
     ; The button is centered and placed at position (17.5, 105)
     ; The button is 365 pixels wide and 35 pixels high
     ; When the button is clicked, the Open_Wifi_Center function is called
     ; with the argument "Normal"
-    wcGui.AddButton("x17.5 y105 w365 h35 Center", "Wifi Center").OnEvent("Click", Open_Wifi_Center.Bind("Normal"))
+    button4 := wcGui.AddButton("x17.5 y105 w365 h35 Center", "Wifi Center")
+    button4.SetColor(b4_bgcol, b_text_col, b4_showBorder, b4_borderCol, b4_roundedCorner)
+    button4.OnEvent("Click", Open_Wifi_Center.Bind("Normal"))
 
     ; Add a close button to the GUI window
     wcGui.OnEvent('Close', (*) => WinClose())
@@ -80,12 +162,6 @@ WIFI(ww_icon, ww_header, on_off_png, ww_transparent, window_width, window_height
     
     ; This code block waits for the wcGui window to appear
     WinWait("Wifi Selection")
-
-    ; Get the position and size of the wcGui window
-    /*
-    ! wcGui.GetPos(&X, &Y, &Width, &Height)
-    ! MsgBox("X = " X "`n" "Y = " Y "`n" "Width = " Width "`n" "Height = " Height)
-    */
 
 	; Calculate the "center" position
     ; Move the mouse to the "center" of the wcGui window
