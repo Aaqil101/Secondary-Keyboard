@@ -6,24 +6,29 @@
 ; without any acceleration or deceleration
 SetDefaultMouseSpeed 0
 
-; Define the function Wifi
-WIFI(ww_icon, on_off_png, ww_transparent, window_width, window_height, wifi_connecting, wifi_connexion, wifi_disconnect, ms_availablenetworks) {
-    ; Variables for the GUI window
-    x := 752
-    y := 451
-    Width := 416
-    Height := 184
+/*
+* Include the GuiEnhancerKit library, which provides a set of functions to enhance the look and feel of AutoHotkey GUIs.
+* For more information, see https://github.com/nperovic/GuiEnhancerKit
+*/
+#Include GuiEnhancerKit.ahk
 
+; Define the function WIFI
+WIFI(ww_icon, ww_header, on_off_png, ww_transparent, window_width, window_height, wifi_connecting, wifi_connexion, wifi_disconnect, ms_availablenetworks) {
     ; Set the icon of the tray to the specified icon file
-    ; ww_Icon is a variable that contains the path to the icon file
+    ; ww_icon is a variable that contains the path to the icon file
     ; This is used to set the icon of the tray to a custom icon
     TraySetIcon(ww_icon)
     
-    ; Create a new GUI window for the Wifi connection tool
-    wcGui := Gui()
-
+    ; Create a new GUI window for wifi connection
     ; Set the GUI window to always on top
-    wcGui.Opt("+AlwaysOnTop")
+    wcGui := GuiExt("+AlwaysOnTop")
+
+    ; Set the title bar of the GUI window to a dark theme
+    wcGui.SetDarkTitle()
+    
+    ; Set the menu of the GUI window to a dark theme
+    ; This will make the menu background and text color dark
+    wcGui.SetDarkMenu()
     
     ; Set the font, font size and font color for the GUI window
     wcGui.SetFont("Bold", "JetBrains Mono NL")
@@ -32,32 +37,37 @@ WIFI(ww_icon, on_off_png, ww_transparent, window_width, window_height, wifi_conn
     
     ; Add a text control to the window with the specified text and
     ; options. The text is centered and placed at position (65, 15).
-    wcGui.Add("Text", "x80 y15 Center", "Select a WifConnection")
+    wcGui.AddText("x80 y15 Center", ww_header)
 
     ; Add two picture controls to the window with the specified image
     ; and options. The first picture is placed at position (15, 9) and
     ; the second at position (335, 9).
-    wcGui.Add("Picture", "x16 y9 w50 h50", on_off_png) ; Left Picture
-    wcGui.Add("Picture", "x335 y9 w50 h50", on_off_png) ; Right Picture
+    wcGui.AddPicture("x16 y9 w50 h50", on_off_png) ; Left Picture
+    wcGui.AddPicture("x335 y9 w50 h50", on_off_png) ; Right Picture
 
     ; Set the font size of the buttons to 10.
     wcGui.SetFont("s10")
 
-    ; Add buttons to the GUI window
-    wcGui.Add("Button", "x17 y65 w120 h30 Center", "Connecting...").OnEvent("Click", Wifi_Connection_v1.Bind("Normal"))
-    wcGui.Add("Button", "x262 y65 w120 h30 Center", "Connexion").OnEvent("Click", Wifi_Connection_v2.Bind("Normal"))
-    wcGui.Add("Button", "x145 y65 w110 h30 Center", "Discinnect").OnEvent("Click", Wifi_Dis.Bind("Normal"))
+    ; Set the background color of the GUI window
+    wcGui.BackColor := "0x313131"
 
-    ; Set the font size of the buttons to 10.
+    ; Add buttons to the GUI window
+    wcGui.AddButton("x17 y65 w120 h30 Center", "Connecting...").OnEvent("Click", Wifi_Connection_v1.Bind("Normal"))
+    wcGui.AddButton("x262 y65 w120 h30 Center", "Connexion").OnEvent("Click", Wifi_Connection_v2.Bind("Normal"))
+    wcGui.AddButton("x145 y65 w110 h30 Center", "Discinnect").OnEvent("Click", Wifi_Dis.Bind("Normal"))
+
+    ; Set the font size of the Wifi Center button to 15.
     wcGui.SetFont("s15")
 
-    wcGui.Add("Button", "x17.5 y105 w365 h35 Center", "Wifi Center").OnEvent("Click", Open_Wifi_Center.Bind("Normal"))
+    ; Add a button to the GUI window with the text "Wifi Center"
+    ; The button is centered and placed at position (17.5, 105)
+    ; The button is 365 pixels wide and 35 pixels high
+    ; When the button is clicked, the Open_Wifi_Center function is called
+    ; with the argument "Normal"
+    wcGui.AddButton("x17.5 y105 w365 h35 Center", "Wifi Center").OnEvent("Click", Open_Wifi_Center.Bind("Normal"))
 
     ; Add a close button to the GUI window
     wcGui.OnEvent('Close', (*) => WinClose())
-
-    ; Set the background color of the GUI window
-    wcGui.BackColor := "123452"
 
     ; Set the title of the GUI window
     wcGui.Title := "Wifi Selection"
@@ -72,8 +82,10 @@ WIFI(ww_icon, on_off_png, ww_transparent, window_width, window_height, wifi_conn
     WinWait("Wifi Selection")
 
     ; Get the position and size of the wcGui window
-    /* wcGui.GetPos(&X, &Y, &Width, &Height)
-    MsgBox("X = " X "`n" "Y = " Y "`n" "Width = " Width "`n" "Height = " Height) */
+    /*
+    ! wcGui.GetPos(&X, &Y, &Width, &Height)
+    ! MsgBox("X = " X "`n" "Y = " Y "`n" "Width = " Width "`n" "Height = " Height)
+    */
 
 	; Calculate the "center" position
     ; Move the mouse to the "center" of the wcGui window
@@ -81,6 +93,10 @@ WIFI(ww_icon, on_off_png, ww_transparent, window_width, window_height, wifi_conn
 		window_width / 2,
 		window_height / 2 - 30
 	)
+
+    /*
+    * The following code block is from a youtube video (https://www.youtube.com/watch?v=jn83VAU3tBw) but the code in tha video is for autohotkey v1 and I am using v2 in here so, I used AHK-v2-script-converter (https://github.com/mmikeww/AHK-v2-script-converter) by mmikeww and changed some of codes myself now it works :) 👇🏼👇🏼👇🏼👇🏼👇🏼👇🏼👇🏼👇🏼👇🏼👇🏼👇🏼👇🏼👇🏼👇🏼👇🏼👇🏼👇🏼👇🏼👇🏼👇🏼👇🏼👇🏼👇🏼👇🏼
+    */
 
     ; IDC constants for LoadCursor (WinAPI)
     ; These constants can be used to load the following cursors:
@@ -132,6 +148,10 @@ WIFI(ww_icon, on_off_png, ww_transparent, window_width, window_height, wifi_conn
     if (ctrl == "Button4")
         DllCall("SetCursor", "UInt", BCursor)
     }
+
+    /*
+    👆🏼👆🏼👆🏼👆🏼👆🏼👆🏼👆🏼👆🏼👆🏼👆🏼👆🏼👆🏼👆🏼👆🏼👆🏼👆🏼👆🏼👆🏼👆🏼👆🏼👆🏼👆🏼👆🏼
+    */
 
     ; Runs the Wifi_Connecting executable and closes the GUI.
     Wifi_Connection_v1(*) {
