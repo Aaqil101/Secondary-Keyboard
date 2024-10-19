@@ -16,8 +16,8 @@ def convert_two_dates(two_date_string):
     start_date, end_date = two_date_string.split(" - ")
 
     # Convert each date to datetime object
-    start_date = datetime.datetime.strptime(start_date, "%b %d, %Y")
-    end_date = datetime.datetime.strptime(end_date, "%b %d, %Y")
+    start_date = datetime.datetime.strptime(start_date, "%Y %b %d")
+    end_date = datetime.datetime.strptime(end_date, "%Y %b %d")
   
     # Format the dates in YYYY-MM-DD format
     # Add "FROM" and "TO"
@@ -30,7 +30,7 @@ def convert_two_dates(two_date_string):
 
 def covert_one_date(one_date_string):
     # Convert the date to datetime object
-    date = datetime.datetime.strptime(one_date_string, "%b %d, %Y")
+    date = datetime.datetime.strptime(one_date_string, "%Y %b %d")
 
     # Format the date in YYYY-MM-DD format
     # Add "FROM", "TO" and "TODAY"
