@@ -389,14 +389,16 @@ Func_g(isHold, taps, state) { ; Graphic Tablet
 	if (isHold = 0) & (taps = 1) & (state)
 	{
 		Run(A_ScriptDir "\lib\vbs\GraphicTablet.vbs")
+		; Run("C:\Users\User\Documents\GitHub\Secondary-Keyboard\lib\vbs\GraphicTablet.vbs")
 	}
 }
 
 Func_s(isHold, taps, state) { ; Services
 	{
 		/*
-			; Win & 1
-			Send, #{1}
+		!Deprecated method, Don't use it.
+		!; Win & 1
+		!Send, #{1}
 		*/
 		Run(A_ScriptDir "\lib\exe\services.lnk")
 	}
