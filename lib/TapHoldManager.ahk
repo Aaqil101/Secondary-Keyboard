@@ -4,7 +4,7 @@ class TapHoldManager {
 	Bindings := Map()
 
 	__New(tapTime?, holdTime?, maxTaps := "", prefixes := "$", window := ""){
-		this.tapTime := tapTime ?? 300
+		this.tapTime := tapTime ?? 150
 		this.holdTime := holdTime ?? this.tapTime
 		this.maxTaps := maxTaps
 		this.prefixes := prefixes
