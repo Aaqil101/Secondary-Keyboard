@@ -125,6 +125,8 @@ Func_a(isHold, taps, state) { ; AutoHotkey
             A_ScriptDir "\lib\pic\HelpSelection_Left.png",
             A_ScriptDir "\lib\pic\HelpSelection_Right.png"
         )
+        TraySetIcon(masterIcon)
+        return
     }
 
     if (isHold = 0) & (taps = 3) & (state) ; ui-dash
@@ -394,7 +396,16 @@ Func_v(isHold, taps, state) { ; VLC Media Player
 Func_w(isHold, taps, state) { ; Wifi
     if (isHold = 0) & (taps = 1) & (state)
     {
-        Pause
+        WIFI(
+            A_ScriptDir "\lib\ico\Wifi.ico",
+            A_ScriptDir "\lib\ico\WifiOn&off.ico",
+            A_ScriptDir "\lib\exe\Wifi_Connecting.exe",
+            A_ScriptDir "\lib\exe\Wifi_Connexion.exe",
+            A_ScriptDir "\lib\exe\Wifi_Disconnect.exe",
+            A_ScriptDir "\lib\exe\ms-availablenetworks.url"
+        )
+        TraySetIcon(masterIcon)
+        return
     }
 }
 
